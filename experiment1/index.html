@@ -1,70 +1,211 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<!-- This title is used for tabs and bookmarks -->
-	<title>Experiment X - Subject/Topic</title>
+  <head>
+    <!-- This title is used for tabs and bookmarks -->
+    <title>Experiment X - Subject/Topic</title>
 
-	<!-- Use UTF character set, a good idea with any webpage -->
-	<meta charset="UTF-8" />
-	<!-- Set viewport so page remains consistently scaled w narrow devices -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Use UTF character set, a good idea with any webpage -->
+    <meta charset="UTF-8" />
+    <!-- Set viewport so page remains consistently scaled w narrow devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<!-- Include CSS file, including a site-wide CSS and for this particular page -->
-	<link rel="stylesheet" type="text/css" href="../css/site.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- Include CSS file, including a site-wide CSS and for this particular page -->
+    <link rel="stylesheet" type="text/css" href="../css/site.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
 
-	<!-- Load jQuery library -->
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-        crossorigin="anonymous"></script>
-	<!-- Load p5.js library -->
-	<script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
+    <!-- Load jQuery library -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <!-- Load p5.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
 
-	<!-- Link to javascript files - DEFER waits until all elements are rendered -->
-    <script type="text/javascript" src="../js/site.js" DEFER></script>
-	<!-- Use me for a JavaScript OOP Project -->
-	<script type="text/javascript" src="./js/project.js" DEFER></script>
-	<!-- Use me for a p5.js project -->
-	<script type="text/javascript" src="./js/sketch.js" DEFER></script>
-</head>
-<body>
-	<!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
-	<main id="content">
-		<section>
+    <!-- Link to javascript files - DEFER waits until all elements are rendered -->
+    <script type="text/javascript" src="../js/site.js" defer></script>
+    <!-- Use me for a JavaScript OOP Project -->
+    <script type="text/javascript" src="./js/project.js" defer></script>
+    <!-- Use me for a p5.js project -->
+    <!-- <script type="text/javascript" src="./js/sketch.js" DEFER></script> -->
+  </head>
+  <body>
+    <!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
+    <main id="content">
+      <section>
+        <h1>Experiment 1 - Two Sentence Horror Story Generator</h1>
 
-			<h1>Experiment X - Subject/Topic</h1>
-
-			<div class="minor-section">
-				<div id="canvas-container">
-					<!-- canvas will be added here -->
-				</div>
-                <div class="fullscreen-box">
-                    <button id="fullscreen">Fullscreen</button>
+        <div class="minor-section">
+          <button id="clicker">reroll it</button>
+          <div
+            style="
+              border: grey solid thin;
+              margin-top: 0.5rem;
+              box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2),
+                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            "
+          >
+            <div
+              style="
+                display: flex;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                padding-bottom: 0.25rem;
+                padding-top: 1rem;
+              "
+            >
+              <div style="width: 40px; height: 40px">
+                <svg
+                  viewbox="0 0 100 100"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="100%"
+                  height="100%"
+                >
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="48"
+                    fill="#ccc"
+                    stroke="#aaa"
+                    stroke-width="2"
+                  />
+                </svg>
+              </div>
+              <div style="display: flex; flex-direction: column">
+                <div
+                  style="
+                    font-family: verdana, arial, helvetica, sans-serif;
+                    font-weight: 700;
+                    font-size: 0.75rem;
+                    line-height: 1rem;
+                    padding-left: 0.5rem;
+                    padding-top: 0.25rem;
+                  "
+                >
+                  r/TwoSentenceHorror
                 </div>
-			</div>
+                <div
+                  style="
+                    font-family: verdana, arial, helvetica, sans-serif;
+                    font-weight: 400;
+                    font-size: 0.75rem;
+                    line-height: 1rem;
+                    padding-left: 0.5rem;
+                    padding-top: 0.25rem;
+                  "
+                >
+                  u/6YuQing6
+                </div>
+              </div>
+            </div>
+            <div
+              style="
+                font-family: verdana, arial, helvetica, sans-serif;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+                margin-block-start: 0.67em;
+                margin-block-end: 0.67em;
+                font-size: 1.125rem;
+                background: #ffffff;
+              "
+              id="box"
+              class="box"
+            ></div>
+            <div
+              style="
+                font-family: verdana, arial, helvetica, sans-serif;
+                color: #181c1f;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                margin-bottom: 0.5rem;
+                margin-block-start: 0.67em;
+                margin-block-end: 0.67em;
+                font-size: 0.875rem;
+                line-height: 1.25rem;
+                background: #ffffff;
+              "
+              id="box1"
+              class="box1"
+            ></div>
+          </div>
+          <div class="fullscreen-box">
+            <button id="fullscreen">Fullscreen</button>
+          </div>
+        </div>
 
-			<div class="minor-section">
-				<h2>Description</h2>
-				<p>What are you trying to acomplish with this experiment?</p>
-			</div>
+        <div class="minor-section">
+          <h2>Description</h2>
+          <p>
+            This was inspired by the subreddit
+            <a
+              href="https://www.reddit.com/r/TwoSentenceHorror/top/"
+              target="_blank"
+              >r/TwoSentenceHorror</a
+            >
+            and its successor
+            <a
+              href="https://www.reddit.com/r/badtwosentencehorrors/"
+              target="_blank"
+              >r/badtwosentencehorrors</a
+            >. In this subreddit, users tell a short horror story in two
+            sentences. While some of the stories are creepy, others are just so
+            bad it's funny. My goal is to try and match the style of the
+            literary geniuses who wrote these stories and display them in the
+            visual aethetic of reddit posts.
+          </p>
 
-			<div class="minor-section">
-				<h2>Technical</h2>
-				<p>Describe in detail what you did technically and how it works?</p>
-			</div>
+          <h2>Some bad two sentence horrors...</h2>
 
-			<div class="minor-section">
-				<h2>Reflection</h2>
-				<p>Each person that worked on the code should reflect on the process, the difficulties, and the successes of the experiment.</p>
-			</div>
+          <p>
+            i screamed as it became april 1st.<br />
+            “get april fooled” said the murderer man as he fooled me with a
+            knife<br />
+            <em>u/theeatingsquirrel</em>
+          </p>
 
-		</section>
-		<nav id="links" class="minor-section">
-			<!-- Put link back to homepage here. -->
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-            </ul>
-		</nav>
-	</main>
-</body>
+          <p>
+            Yippee!! ready for the day!!" i said as i put on my bra.<br />
+            i look down and it is not a bra, but bomb strapped to my chest<br />
+            <em>u/Worried-Shallot5669</em>
+          </p>
+
+          <p>
+            The IKEA Incident <br />
+            I decided to go on a tour of the IKEA factory.<br />
+            Little did i know that i would find the creature that lays the IKEA
+            meatballs<br />
+            <em>u/CocoKailey</em>
+          </p>
+
+          <p>
+            "Dad, it's time for you to open up your Christmas presents," I said
+            jokingly.<br />
+            My smile turned to horror as his urn levitated and flew towards the
+            tree.<br />
+            <em>u/Ok_Fly2518</em>
+          </p>
+        </div>
+        <div class="minor-section">
+          <h2>Technical</h2>
+          <p>Describe in detail what you did technically and how it works?</p>
+        </div>
+
+        <div class="minor-section">
+          <h2>Reflection</h2>
+          <p>
+            Each person that worked on the code should reflect on the process,
+            the difficulties, and the successes of the experiment.
+          </p>
+        </div>
+      </section>
+      <nav id="links" class="minor-section">
+        <!-- Put link back to homepage here. -->
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+        </ul>
+      </nav>
+    </main>
+  </body>
 </html>
