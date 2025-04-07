@@ -35,103 +35,109 @@
       <section>
         <h1>Experiment 1 - Two Sentence Horror Story Generator</h1>
 
-        <div class="minor-section">
-          <button id="clicker">reroll it</button>
-          <div
-            style="
-              border: grey solid thin;
-              margin-top: 0.5rem;
-              box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2),
-                0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            "
-          >
+        <div
+          class="minor-section"
+          style="display: flex; justify-content: center; padding: 2rem"
+        >
+          <div style="max-width: 800px; min-width: 60%">
+            <button id="clicker">reroll it</button>
             <div
               style="
-                display: flex;
-                padding-left: 1rem;
-                padding-right: 1rem;
-                padding-bottom: 0.25rem;
-                padding-top: 1rem;
+                border: grey solid thin;
+                margin-top: 0.5rem;
+                margin-bottom: 1rem;
+                box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2),
+                  0 6px 20px 0 rgba(0, 0, 0, 0.19);
               "
             >
-              <div style="width: 40px; height: 40px">
-                <svg
-                  viewbox="0 0 100 100"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="100%"
-                  height="100%"
-                >
-                  <circle
-                    cx="50"
-                    cy="50"
-                    r="48"
-                    fill="#ccc"
-                    stroke="#aaa"
-                    stroke-width="2"
-                  />
-                </svg>
-              </div>
-              <div style="display: flex; flex-direction: column">
-                <div
-                  style="
-                    font-family: verdana, arial, helvetica, sans-serif;
-                    font-weight: 700;
-                    font-size: 0.75rem;
-                    line-height: 1rem;
-                    padding-left: 0.5rem;
-                    padding-top: 0.25rem;
-                  "
-                >
-                  r/TwoSentenceHorror
+              <div
+                style="
+                  display: flex;
+                  padding-left: 1rem;
+                  padding-right: 1rem;
+                  padding-bottom: 0.25rem;
+                  padding-top: 1rem;
+                "
+              >
+                <div style="width: 40px; height: 40px">
+                  <svg
+                    viewbox="0 0 100 100"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100%"
+                    height="100%"
+                  >
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="48"
+                      fill="#ccc"
+                      stroke="#aaa"
+                      stroke-width="2"
+                    />
+                  </svg>
                 </div>
-                <div
-                  style="
-                    font-family: verdana, arial, helvetica, sans-serif;
-                    font-weight: 400;
-                    font-size: 0.75rem;
-                    line-height: 1rem;
-                    padding-left: 0.5rem;
-                    padding-top: 0.25rem;
-                  "
-                >
-                  u/6YuQing6
+                <div style="display: flex; flex-direction: column">
+                  <div
+                    style="
+                      font-family: verdana, arial, helvetica, sans-serif;
+                      font-weight: 700;
+                      font-size: 0.75rem;
+                      line-height: 1rem;
+                      padding-left: 0.5rem;
+                      padding-top: 0.25rem;
+                    "
+                  >
+                    r/TwoSentenceHorror
+                  </div>
+                  <div
+                    style="
+                      font-family: verdana, arial, helvetica, sans-serif;
+                      font-weight: 400;
+                      font-size: 0.75rem;
+                      line-height: 1rem;
+                      padding-left: 0.5rem;
+                      padding-top: 0.25rem;
+                    "
+                  >
+                    u/6YuQing6
+                  </div>
                 </div>
               </div>
+              <div
+                style="
+                  font-family: verdana, arial, helvetica, sans-serif;
+                  padding-left: 1rem;
+                  padding-right: 1rem;
+                  font-weight: 600;
+                  margin-bottom: 0.5rem;
+                  margin-block-start: 0.67em;
+                  margin-block-end: 0.67em;
+                  font-size: 1.125rem;
+                  background: #ffffff;
+                "
+                id="box"
+                class="box"
+              ></div>
+              <div
+                style="
+                  font-family: verdana, arial, helvetica, sans-serif;
+                  color: #181c1f;
+                  padding-left: 1rem;
+                  padding-right: 1rem;
+                  margin-bottom: 1rem;
+                  margin-block-start: 0.67em;
+                  margin-block-end: 0.67em;
+                  font-size: 0.875rem;
+                  line-height: 1.25rem;
+                  background: #ffffff;
+                "
+                id="box1"
+                class="box1"
+              ></div>
             </div>
-            <div
-              style="
-                font-family: verdana, arial, helvetica, sans-serif;
-                padding-left: 1rem;
-                padding-right: 1rem;
-                font-weight: 600;
-                margin-bottom: 0.5rem;
-                margin-block-start: 0.67em;
-                margin-block-end: 0.67em;
-                font-size: 1.125rem;
-                background: #ffffff;
-              "
-              id="box"
-              class="box"
-            ></div>
-            <div
-              style="
-                font-family: verdana, arial, helvetica, sans-serif;
-                color: #181c1f;
-                padding-left: 1rem;
-                padding-right: 1rem;
-                margin-bottom: 0.5rem;
-                margin-block-start: 0.67em;
-                margin-block-end: 0.67em;
-                font-size: 0.875rem;
-                line-height: 1.25rem;
-                background: #ffffff;
-              "
-              id="box1"
-              class="box1"
-            ></div>
-          </div>
-          <div class="fullscreen-box">
-            <button id="fullscreen">Fullscreen</button>
+            <div class="fullscreen-box">
+              <button id="fullscreen">Fullscreen</button>
+            </div>
           </div>
         </div>
 
@@ -189,7 +195,21 @@
         </div>
         <div class="minor-section">
           <h2>Technical</h2>
-          <p>Describe in detail what you did technically and how it works?</p>
+          <p>
+            Translated from
+            <a
+              href="https://glitch.com/edit/#!/horror-story-simulator"
+              target="_blank"
+              >https://glitch.com/edit/#!/horror-story-simulator</a
+            >
+            using
+            <a href="https://glitch.com/~cmpm147-ex01-bad-quests">
+              https://glitch.com/~cmpm147-ex01-bad-quests </a
+            >. <br />
+            A grammar is defined with simple replacement tokens. A replacer()
+            function picks a random replacement for any token that appears in
+            the text.
+          </p>
         </div>
 
         <div class="minor-section">
