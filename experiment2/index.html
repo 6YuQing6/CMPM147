@@ -48,6 +48,9 @@
         <div class="minor-section">
           <h2>Description</h2>
           <p>This was inspired by the ivy growing in Rachel Carson.</p>
+          <div class="image-wrapper">
+            <img class="cat-photo" src="../img/japanese-ivy.jpg" />
+          </div>
         </div>
 
         <div class="minor-section">
@@ -71,7 +74,25 @@
           <p>
             This was a very exciting and fun project to work on. I learned a lot
             about how to manipulate graphics using various equations, and how to
-            use perlin noise to generate content.
+            use perlin noise to generate content. The part I feel like was the
+            most successful was how the leaves turned out. My favorite part is
+            how the leaves have some randomized color and are drawn overlapping
+            the roots, so that when it clumps up it looks like it’s 3D, which is
+            pretty cool. <br /><br />The most challenging part of this project
+            was figuring out how to make the roots look like roots. I thought
+            that using recursion would be the best way, but it was really hard
+            to figure out how, since originally the points were first rendered
+            where every frame would go and calculate the next point and then
+            draw it. To solve this problem, I had to rewrite the root class to
+            first draw and store its points into an array and then draw those
+            points instead. But then later on I ran into other issues like the
+            branches being offset by the noise and that took a long time to
+            figure out why.<br /><br />
+            If I had more time to work on this project, I would try to make the
+            roots animated too. Originally I wanted to animate the roots slowly
+            growing and branching out but ran out of time to do it. I would also
+            like to add ways to interact with the canvas, like growing roots
+            from the mouse position instead of a fixed point.
           </p>
         </div>
       </section>
