@@ -37,10 +37,13 @@ function resizeScreen() {
 /* exported setup, draw */
 
 let seed = 239;
-const leafColor1 = "rgb(104,126,0)"; // rgb(104, 126, 18)
-const leafColor2 = "rgb(169,181,0)"; // rgb(183, 195, 18)
+const leafColor1 = "rgb(84, 96, 20)"; // rgb(104, 126, 18)
+const leafColor2 = "rgb(219, 239, 90)"; // rgb(183, 195, 18)
 const rootColor = "rgb(158,146,126)";
+const backgroundColor = "rgb(205,211,217)";
+const backgroundShadowColor = "rgba(56,56,57,0.8)";
 
+// 239	232	90
 // #6a8742
 // #9fc26f
 // #9e927e
@@ -50,12 +53,17 @@ let leaf;
 
 function growVines(numRoots = 1, originX = 0, originY = 0) {
   roots = [];
+  let length = width;
+  let safeAngle = getSafeAngle(originX, originY, length);
   for (let i = 0; i < numRoots; i++) {
-    let length = width;
     let angleNoise = noise(i, seed);
-    let safeAngle = getSafeAngle(originX, originY, length);
     let angle = map(angleNoise, 0, 1, safeAngle.min, safeAngle.max); // maps to right side
-    let r = new Vine(originX, originY, length, angle);
+    let r = new Vine(
+      originX,
+      originY + map(noise(i), 0, 1, -height / 8, height / 8),
+      length,
+      angle
+    );
     roots.push(r);
   }
 }
@@ -80,7 +88,7 @@ function getSafeAngle(x1, y1, length) {
   };
 }
 
-// // takes in a point, length, and angle and creates a line using noise from start to end point
+// takes in a point, length, and angle and creates a line using noise from start to end point
 class Vine {
   constructor(
     x1,
@@ -150,15 +158,15 @@ class Vine {
 
       // grow new root
       for (let j = 0; j < 1; j++) {
-        let angleOffset = random(-45, 45);
+        let angleOffset = random(-60, 60);
         let newAngle = baseAngle + angleOffset;
-        let newLength = this.length * 0.5;
+        let newLength = this.length * 0.55;
 
         this.children.push(
           new Vine(x, y, newLength, newAngle, {
             start: this.start + i * this.inc,
             inc: this.inc,
-            wiggle: this.wiggle * 1.5,
+            wiggle: this.wiggle * 1.2,
             color: this.color,
             strokeWeight: this.strokeWeight * this.childStrokeMult,
             depth: this.depth + 1,
@@ -190,8 +198,8 @@ class Vine {
       if (random() < this.leafFrequency) {
         this.leafs.push(
           new Leaf(
-            pt.x,
-            pt.y,
+            pt.x + random(5),
+            pt.y + random(5),
             random(this.leafSize.min, this.leafSize.max),
             random(150, 180)
           )
@@ -201,6 +209,23 @@ class Vine {
   }
 
   display() {
+    // vine shadow
+    push();
+    translate(0, 3);
+    stroke(backgroundShadowColor);
+    strokeWeight(this.strokeWeight);
+    noFill();
+    beginShape();
+    let xoff = this.start;
+    for (let i = 0; i <= this.steps && i < this.drawnPoints.length; i++) {
+      let pt = this.drawnPoints[i];
+      let shadowVariable = map(noise(xoff), 0, 1, -1, 1);
+      vertex(pt.x, pt.y + shadowVariable);
+      xoff += this.inc;
+    }
+    endShape();
+    pop();
+
     noFill();
     stroke(this.color);
     strokeWeight(this.strokeWeight);
@@ -251,7 +276,7 @@ function setup() {
 function draw() {
   // call a method on the instance
   myInstance.myMethod();
-  background(225);
+  background(backgroundColor);
 
   // my stuff
   randomSeed(seed);
@@ -264,39 +289,69 @@ function draw() {
   }
 }
 
-function mousePressed() {
-  // Create a new leaf at the mouse position with a random angle
-  leaf = new Leaf(mouseX, mouseY, 1, random(PI / 2));
-  leaf.display();
-}
-
 // leaf shape taken from https://editor.p5js.org/pphoebelemonn/sketches/9k-zBl-NF
 class Leaf {
   constructor(x, y, size, angle) {
     this.x = x;
     this.y = y;
-    this.size = size;
     this.angle = radians(angle);
     this.current_size = size / 10;
+
+    // Scale final size based on X position (left = full size, right = smaller)
+    // https://p5js.org/examples/calculating-values-constrain/
+    let xNorm = constrain(x / width, 0, 0.5);
+    let sizeScale = 1 - xNorm; // left = 1, right = 0
+    this.size = size * sizeScale;
+
+    this.colorOffset = random(-0.2, 0.2); // to make color a little more random
+    this.swayAmount = constrain(this.size, 0, 0.3);
+    this.swayAngle = 0;
   }
 
   update() {
     if (this.current_size < this.size) {
-      this.current_size += 0.005;
-      this.current_size = min(this.current_size, this.size);
+      // Normalize x position from 0 (left) to 1 (right)
+      let xNorm = constrain(this.x / width, 0, 1);
+
+      // Invert so left = 1 (faster), right = 0 (slower)
+      let growthFactor = 1 - xNorm;
+
+      // Adjust growth speed based on x
+      let growthSpeed = 0.01 * growthFactor;
+
+      this.current_size += growthSpeed;
     }
+    this.swayAngle = noise(millis() / 1500) * this.swayAmount;
   }
 
   display() {
+    // https://p5js.org/tutorials/color-gradients/
+    // Interpolate leaf color based on Y position
+    let xNorm = constrain(this.x / width + this.colorOffset, 0, 1);
+    let baseColor = lerpColor(color(leafColor1), color(leafColor2), xNorm);
+
+    // make shadow color basecolor but darker
+    let shadowColor = color(
+      red(baseColor) * 0.2,
+      green(baseColor) * 0.2,
+      blue(baseColor) * 0.2,
+      100
+    );
+
     push();
     translate(this.x, this.y);
     scale(this.current_size);
-    rotate(this.angle);
+    rotate(this.angle + this.swayAngle);
+
+    push();
+    translate(5, -5);
 
     noStroke();
     beginShape();
 
-    fill(leafColor1);
+    noStroke();
+    fill(shadowColor);
+
     vertex(0, 0);
     vertex(15, 5);
     vertex(30, -15);
@@ -306,11 +361,24 @@ class Leaf {
     vertex(-25, -25);
     vertex(-20, 0);
     endShape(CLOSE);
+    pop();
 
-    // strokeWeight(3);
-    // line(0, 0, 10, -47); // central vein
-    // line(0, 0, 28, -12); // side vein
-    // line(0, 0, -23, -22); // side vein
+    noStroke();
+    beginShape();
+
+    // https://p5js.org/tutorials/color-gradients/
+    // Interpolate leaf color based on Y position
+    fill(baseColor);
+
+    vertex(0, 0);
+    vertex(15, 5);
+    vertex(30, -15);
+    vertex(16, -20);
+    vertex(10, -50);
+    vertex(-8, -25);
+    vertex(-25, -25);
+    vertex(-20, 0);
+    endShape(CLOSE);
     pop();
   }
 }
