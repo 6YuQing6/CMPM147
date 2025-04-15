@@ -251,7 +251,8 @@ class Vine {
 
 // setup() function is called once when the program starts
 function setup() {
-  createButton("reimagine").mousePressed(() => {
+  reimagineButton = $("#clicker");
+  reimagineButton.click(() => {
     seed++;
     growVines(numRoots, 0, random(height / 4, (3 * height) / 4));
   });
@@ -378,7 +379,22 @@ class Leaf {
     vertex(-8, -25);
     vertex(-25, -25);
     vertex(-20, 0);
+
+    stroke(shadowColor);
+    strokeWeight(2);
+
     endShape(CLOSE);
+
+    let veinColor = color(
+      red(baseColor) * 1.2,
+      green(baseColor) * 1.2,
+      blue(baseColor) * 1.2,
+      100
+    );
+    stroke(veinColor);
+    line(0, 0, 10, -47); // central vein
+    line(0, 0, 28, -12); // side vein
+    line(0, 0, -23, -22); // side vein
     pop();
   }
 }
