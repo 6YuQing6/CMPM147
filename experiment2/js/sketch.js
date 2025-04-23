@@ -6,25 +6,10 @@
 // Note that p5.js looks for a file called sketch.js
 
 // Constants - User-servicable parts
-// In a longer project I like to put these in a separate file
-const VALUE1 = 1;
-const VALUE2 = 2;
 
 // Globals
-let myInstance;
 let canvasContainer;
 var centerHorz, centerVert;
-
-class MyClass {
-  constructor(param1, param2) {
-    this.property1 = param1;
-    this.property2 = param2;
-  }
-
-  myMethod() {
-    // code to run when method is called
-  }
-}
 
 function resizeScreen() {
   centerHorz = canvasContainer.width() / 2; // Adjusted for drawing logic
@@ -37,10 +22,10 @@ function resizeScreen() {
 /* exported setup, draw */
 
 let seed = 239;
-const leafColor1 = "rgb(84, 96, 20)"; // rgb(104, 126, 18)
-const leafColor2 = "rgb(219, 239, 90)"; // rgb(183, 195, 18)
-const rootColor = "rgb(158,146,126)";
-const backgroundColor = "rgb(205,211,217)";
+const LEAF_COLOR_DARK = "rgb(84, 96, 20)"; // rgb(104, 126, 18) // #556014
+const LEAF_COLOR_LIGHT = "rgb(219, 239, 90)"; // rgb(183, 195, 18) // #dbef5a
+const ROOT_COLOR = "rgb(158,146,126)"; // #9e927e
+const BACKGROUND_COLOR = "rgb(205,211,217)"; // #cdd3d9
 const backgroundShadowColor = "rgba(56,56,57,0.8)";
 
 // 239	232	90
@@ -48,10 +33,71 @@ const backgroundShadowColor = "rgba(56,56,57,0.8)";
 // #9fc26f
 // #9e927e
 let roots = [];
-let numRoots = 5;
-let leaf;
 
-function growVines(numRoots = 1, originX = 0, originY = 0) {
+// Constants
+let NUMROOTS = 5;
+let Y_OFFSET;
+let Y_ORIGIN_MAX;
+let Y_ORIGIN_MIN;
+
+let ROOT_WIGGLE = 40;
+let ROOT_STROKE = 10;
+let BRANCH_STEP; // width / 4
+
+let LEAF_FREQUENCY = 0.03;
+let LEAF_SIZE = { min: 0.1, max: 1.5 };
+let SWAY = true;
+
+function calculateConstants() {
+  // CONSTANTS
+  Y_OFFSET = height / 8;
+  Y_ORIGIN_MIN = 2 * Y_OFFSET;
+  Y_ORIGIN_MAX = 3 * 2 * Y_OFFSET;
+  BRANCH_STEP = width / 4;
+}
+
+// setup() function is called once when the program starts
+function setup() {
+  // place our canvas, making it fit our container
+  canvasContainer = $("#canvas-container");
+  let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
+  canvas.parent("canvas-container");
+
+  calculateConstants();
+  // resize canvas is the page is resized
+  // reimagine button
+  reimagineButton = $("#clicker");
+  reimagineButton.click(() => {
+    seed++;
+    calculateConstants();
+    growVines(NUMROOTS, 0, random(Y_ORIGIN_MIN, Y_ORIGIN_MAX));
+  });
+
+  growVines(NUMROOTS, 0, random(Y_ORIGIN_MIN, Y_ORIGIN_MAX));
+
+  $(window).resize(function () {
+    resizeScreen();
+  });
+  resizeScreen();
+}
+
+// draw() function is called repeatedly, it's the main animation loop
+function draw() {
+  // call a method on the instance
+  background(BACKGROUND_COLOR);
+
+  // my stuff
+  randomSeed(seed);
+
+  noStroke();
+
+  for (let r of roots) {
+    // r.grow(); // progressively generate vine
+    r.display(); // show the drawn portion
+  }
+}
+
+function growVines(numRoots, originX = 0, originY = 0) {
   roots = [];
   let length = width;
   let safeAngle = getSafeAngle(originX, originY, length);
@@ -60,7 +106,7 @@ function growVines(numRoots = 1, originX = 0, originY = 0) {
     let angle = map(angleNoise, 0, 1, safeAngle.min, safeAngle.max); // maps to right side
     let r = new Vine(
       originX,
-      originY + map(noise(i), 0, 1, -height / 8, height / 8),
+      originY + map(noise(i), 0, 1, -Y_OFFSET, Y_OFFSET),
       length,
       angle
     );
@@ -98,16 +144,16 @@ class Vine {
     {
       start = random(width),
       inc = 0.01,
-      wiggle = 40,
-      color = rootColor,
+      wiggle = ROOT_WIGGLE,
+      color = ROOT_COLOR,
       steps = null,
-      strokeWeight = 10,
+      strokeWeight = ROOT_STROKE,
       childStrokeMult = 0.5,
       depth = 0, // recusrion depth
       maxDepth = 3, // max depth before stopping
-      branchEvery = width / 4, // branches recursively every x steps
-      leafFrequency = 0.03,
-      leafSize = { min: 0.1, max: 1.5 },
+      branchEvery = BRANCH_STEP, // branches recursively every x steps
+      leafFrequency = LEAF_FREQUENCY,
+      leafSize = LEAF_SIZE,
     } = {}
   ) {
     // points configuration
@@ -249,47 +295,6 @@ class Vine {
   }
 }
 
-// setup() function is called once when the program starts
-function setup() {
-  reimagineButton = $("#clicker");
-  reimagineButton.click(() => {
-    seed++;
-    growVines(numRoots, 0, random(height / 4, (3 * height) / 4));
-  });
-  // place our canvas, making it fit our container
-  canvasContainer = $("#canvas-container");
-  let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
-  canvas.parent("canvas-container");
-  // resize canvas is the page is resized
-
-  // create an instance of the class
-  myInstance = new MyClass("VALUE1", "VALUE2");
-
-  growVines(numRoots, 0, random(height / 4, (3 * height) / 4));
-
-  $(window).resize(function () {
-    resizeScreen();
-  });
-  resizeScreen();
-}
-
-// draw() function is called repeatedly, it's the main animation loop
-function draw() {
-  // call a method on the instance
-  myInstance.myMethod();
-  background(backgroundColor);
-
-  // my stuff
-  randomSeed(seed);
-
-  noStroke();
-
-  for (let r of roots) {
-    // r.grow(); // progressively generate vine
-    r.display(); // show the drawn portion
-  }
-}
-
 // leaf shape taken from https://editor.p5js.org/pphoebelemonn/sketches/9k-zBl-NF
 class Leaf {
   constructor(x, y, size, angle) {
@@ -322,14 +327,20 @@ class Leaf {
 
       this.current_size += growthSpeed;
     }
-    this.swayAngle = noise(millis() / 1500) * this.swayAmount;
+    if (SWAY) {
+      this.swayAngle = noise(millis() / 1500) * this.swayAmount;
+    }
   }
 
   display() {
     // https://p5js.org/tutorials/color-gradients/
     // Interpolate leaf color based on Y position
     let xNorm = constrain(this.x / width + this.colorOffset, 0, 1);
-    let baseColor = lerpColor(color(leafColor1), color(leafColor2), xNorm);
+    let baseColor = lerpColor(
+      color(LEAF_COLOR_DARK),
+      color(LEAF_COLOR_LIGHT),
+      xNorm
+    );
 
     // make shadow color basecolor but darker
     let shadowColor = color(
