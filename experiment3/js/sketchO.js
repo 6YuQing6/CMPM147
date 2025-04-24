@@ -301,8 +301,8 @@ new p5(function (p) {
     drawBase(grid, "-");
     drawBase(grid, "=");
     drawBase(grid, "~");
-    drawBorders(grid, "~");
     drawBorders(grid, "=");
+    drawBorders(grid, "~");
 
     for (let i = 0; i < grid.length; i++) {
       for (let j = 0; j < grid[i].length; j++) {
