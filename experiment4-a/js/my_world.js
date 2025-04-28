@@ -96,7 +96,6 @@ let worldSeed;
 
 function p3_worldKeyChanged(key) {
   worldSeed = XXH.h32(key, 0);
-  console.log(worldSeed);
   clearAllCells();
   noiseSeed(worldSeed);
   randomSeed(worldSeed);
