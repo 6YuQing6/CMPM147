@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- This title is used for tabs and bookmarks -->
+    <title>Experiment 4 - 1</title>
+
+    <!-- Use UTF character set, a good idea with any webpage -->
+    <meta charset="UTF-8" />
+    <!-- Set viewport so page remains consistently scaled w narrow devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Include CSS file, including a site-wide CSS and for this particular page -->
+    <link rel="stylesheet" type="text/css" href="../css/site.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <!-- Load jQuery library -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <!-- Load p5.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
+
+    <!-- Link to javascript files - DEFER waits until all elements are rendered -->
+    <script type="text/javascript" src="../js/site.js" defer></script>
+    <!-- Use me for a JavaScript OOP Project -->
+    <!-- <script type="text/javascript" src="./js/project.js" defer></script> -->
+    <script src="./js/xxhash.min.js" defer></script>
+    <script src="./js/engine.js" defer></script>
+    <script src="./js/my_world.js" defer></script>
+    <!-- Use me for a p5.js project -->
+  </head>
+  <body>
+    <!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
+    <main id="content">
+      <section>
+        <h1>Experiment 4 - Game of Life</h1>
+
+        <div class="minor-section">
+          <div id="canvas-container">
+            <!-- canvas will be added here -->
+          </div>
+          <div>
+            World seed: <input type="text" id="world-seed" value="xyzzy" />
+          </div>
+          <div>
+            <button id="pause-button">pause</button>
+          </div>
+          <div>"Arrow keys scroll. Clicking changes tiles."</div>
+
+          <div class="fullscreen-box">
+            <button id="fullscreen">Fullscreen</button>
+          </div>
+        </div>
+
+        <div class="minor-section">
+          <h2>Description</h2>
+          <p>
+            Infinity: This project extends in all 4 directions infinitely.
+            Variation in Space: There are a variety of tiles with varying colors
+            and heights based on certain parameters. Variation in Key: The
+            starting generation relies on a replicable world key. Signs of Life:
+            The project uses Conway's Game of Life to create constant new
+            generations of cells that are visually represented by height and
+            color variation. The user can also interact with the generator by
+            clicking to place their own living cells.
+          </p>
+        </div>
+
+        <div class="minor-section">
+          <h2>Technical</h2>
+          <p>
+            I utilize a combination of procedural generation algorithms to
+            create a dynamically evolving virtual landscape. The core of the
+            experiment lies in the unique hash value generated from user
+            interactions seeds the procedural algorithms. Using the XXH32
+            hashing function and p5.js's built-in noiseSeed and randomSeed
+            methods, each input generates a distinct visual output on a grid of
+            tiles. Each tile, depending on its hashed value, displays different
+            shades and shapes, responding to clicks by altering its appearance
+            and opacity. The technical architecture is designed to mimic
+            infinite possibilities within a contained digital ecosystem,
+            allowing each user's journey through the landscape to be unique and
+            personal. The setup leverages JavaScript's flexibility and the p5.js
+            library's graphical capabilities to render a responsive and
+            interactive artistic piece.
+          </p>
+        </div>
+
+        <div class="minor-section">
+          <h2>Reflection</h2>
+          <p></p>
+        </div>
+      </section>
+      <nav id="links" class="minor-section">
+        <!-- Put link back to homepage here. -->
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+        </ul>
+      </nav>
+    </main>
+  </body>
+</html>
