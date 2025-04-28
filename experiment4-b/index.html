@@ -2,7 +2,7 @@
 <html>
   <head>
     <!-- This title is used for tabs and bookmarks -->
-    <title>Experiment 4 - a</title>
+    <title>Experiment 4 - b</title>
 
     <!-- Use UTF character set, a good idea with any webpage -->
     <meta charset="UTF-8" />
@@ -35,7 +35,7 @@
     <!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
     <main id="content">
       <section>
-        <h1>Experiment 4 - Game of Life</h1>
+        <h1>Experiment 4 - Game of Life Obstacle Course</h1>
 
         <div class="minor-section">
           <div id="canvas-container">
@@ -44,10 +44,8 @@
           <div>
             World seed: <input type="text" id="world-seed" value="xyzzy" />
           </div>
-          <div>
-            <button id="pause-button">pause</button>
-          </div>
-          <div>"Arrow keys scroll. Clicking changes tiles."</div>
+
+          <div>Use WASD to move around. Avoid the obstacles.</div>
 
           <div class="fullscreen-box">
             <button id="fullscreen">Fullscreen</button>
@@ -91,12 +89,14 @@
         <div class="minor-section">
           <h2>Reflection</h2>
           <p>
-            This experiement was inspired by Conway's Game of Life and I wanted
-            to utilize the 3D aspects of an isometric grid. The cells have a
-            height and color based on it's nearest neighbors, which produces a
-            lot of interesting patterns. Overall I like how the visuals turned
-            out. In the future I would add a color picker and next / back steps
-            to view the generations more clearly.
+            I worked on this experiement with Lia Cui. She created the player
+            movement and camera logic. I created the game of life logic and the
+            tile rendering functions. If we had more time to work on this, I
+            would fix up the game logic -- right now the player can stand inside
+            of a cell as it becomes active. My favorite part of this experiment
+            is how the preview of the next generation only shows the new active
+            cells instead of all of them so you have to predict where the cells
+            will disappear which is really fun.
           </p>
         </div>
       </section>
