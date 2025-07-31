@@ -15,17 +15,23 @@ main {
   gap: 1rem;
 }
 
+#canvas-container {
+  display: flex;
+  /* width: calc(1200px * 0.82);
+  height: calc(1270px * 0.82);
+  transform: scale(0.82);
+  transform-origin: top left; */
+}
+
 .container {
   background: white;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  margin: auto;
 }
 
 h2 {
-  text-align: center;
+  text-align: left;
   margin-bottom: 20px;
 }
 
@@ -39,7 +45,7 @@ h2 {
   max-width: 1000px;
   height: auto;
   max-height: 1270px;
-  background-color: whitesmoke;
+  background-color: white;
   padding: 10px;
   overflow: auto;
 }

@@ -50,14 +50,12 @@ let tankFilter;
 let bobber;
 
 let container;
+const containerID = "#canvas-container";
 
 function setup() {
   randomSeed(0);
-  // const c = createCanvas(w, h + h2 + 70);
-  const c = createCanvas(w, h + h2 + 70);
-
-  // Option 1: Append to canvas's parent
-  let parent = c.parent(); // Get parent container of canvas
+  let canvas = createCanvas(w, h + h2 + 70);
+  canvas.parent(containerID);
 
   // Create a div element from string (safe way)
   container = document.createElement("div");
@@ -69,7 +67,7 @@ function setup() {
       </div>
     </div>
   `;
-  parent.appendChild(container);
+  canvas.parent().appendChild(container);
 
   pixelDensity(1);
   colorMode(HSB);

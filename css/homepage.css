@@ -1,9 +1,11 @@
-
 .image-wrapper {
-  width: 100%x;
+  width: auto;
+  height: auto;
   padding: 0;
-  border-radius: 10px;
   overflow: hidden;
+  img {
+    border-radius: 10px;
+  }
 }
 
 .two-column {
@@ -11,10 +13,10 @@
   flex-direction: row;
 }
 
-.two-column>*:nth-child(1) {
-  flex: 2;
+.two-column > *:nth-child(1) {
+  flex: 3;
 }
 
-.two-column>*:nth-child(2) {
-  flex: 1;
+.two-column > *:nth-child(2) {
+  flex: 2;
 }

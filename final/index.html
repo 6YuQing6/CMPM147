@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Fish Fishing Fish -- Team Oni</title>
+    <link rel="stylesheet" type="text/css" href="../css/site.css" />
     <link rel="stylesheet" type="text/css" href="./lab.css" />
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.min.js"
@@ -26,7 +27,6 @@
     <script src="./js/background.js" defer></script>
     <script src="./js/sketch.js" defer></script>
     <script src="./js/aquarium.js" defer></script>
-
     <!-- <div class="right-column">
       <div id="facts-container">
         <h3 class="fish">Fish:</h3>
@@ -34,4 +34,62 @@
       </div>
     </div> -->
   </head>
+  <body>
+    <div id="canvas-container"></div>
+    <div class="minor-section">
+      <h2>Description</h2>
+      <p>
+        Created in collaboration with Lui Cui, Ben Silver, and Kevin Gallegos.
+        <br />
+        <br />
+        This project is an interactive web-based fishing game where players
+        catch procedurally generated fish using p5.js. Each fish will have a
+        unique appearance and a quirky, auto-generated name and description
+        created with Tracery. The game features two procedurally generated
+        backgrounds: a fishing dock and an aquarium where players can view their
+        catches. Caught fish are saved to local storage, and players can
+        interact by clicking to catch fish and hovering to view them. Our main
+        focus is on creating a diverse and visually interesting fish generator
+        with a cohesive pixel aesthetic.
+      </p>
+    </div>
+    <div class="minor-section">
+      <h2>Technical</h2>
+      <p>
+        When hovering over a fish, their information is displayed inside of the
+        game. All of the player’s caught fish is displayed to the side. When the
+        game is reloaded, fish saved to local storage are loaded back into the
+        game. Each fish has a unique movement speed/pattern and behavior.
+        Aggressive fish will chase other fish who are a different color to them
+        and eat them, creating emergent behavior. Fish rarity is calculated
+        based on the fish’s color, texture, and pattern. Monochrome fish are
+        less rare, while special patterns like stripes, rainbow fish, or analog
+        horror fish are more rare.
+      </p>
+    </div>
+    <div class="minor-section">
+      <h2>Reflection</h2>
+      <p>
+        I worked on creating the fish generator, the fish drawing functions for
+        the aquarium, the fish ui (hover and side display), and helped with
+        refactoring the code and fixing bugs. For the fish generator I looked at
+        several fish generators online for reference –
+        https://github.com/igruenig/fishGenerator?tab=readme-ov-file and
+        https://fishdraw.glitch.me/ by Lingdong Huang. I also researched
+        pixelization and color quantization to experiment with different fish
+        styles and patterns. Overall I’m very happy with the progress we have
+        made as a team and grateful to be working on this project together.
+        There are still a lot of ideas that we haven’t managed to implement such
+        as genetic evolution, saving fish images, more varied text generation
+        that depends on the fish, gamified fishing, so in the future I might add
+        additional features.
+      </p>
+    </div>
+    <nav id="links" class="minor-section">
+      <!-- Put link back to homepage here. -->
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+      </ul>
+    </nav>
+  </body>
 </html>

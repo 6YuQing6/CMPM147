@@ -22,11 +22,15 @@ function resizeScreen() {
 /* exported setup, draw */
 
 let seed = 239;
-const LEAF_COLOR_DARK = "rgb(84, 96, 20)"; // rgb(104, 126, 18) // #556014
-const LEAF_COLOR_LIGHT = "rgb(219, 239, 90)"; // rgb(183, 195, 18) // #dbef5a
-const ROOT_COLOR = "rgb(158,146,126)"; // #9e927e
-const BACKGROUND_COLOR = "rgb(205,211,217)"; // #cdd3d9
-const backgroundShadowColor = "rgba(56,56,57,0.8)";
+// colors
+let LEAF_COLOR_DARK = "rgb(84, 96, 20)"; // rgb(104, 126, 18) // #556014
+let LEAF_COLOR_LIGHT = "rgb(219, 239, 90)"; // rgb(183, 195, 18) // #dbef5a
+let ROOT_COLOR = "rgb(158,146,126)"; // #9e927e
+const LEAF_COLOR_DARK_ID = "#leaf-dark";
+const LEAF_COLOR_LIGHT_ID = "#leaf-light";
+const ROOT_COLOR_ID = "#root";
+const BACKGROUND_COLOR = "rgba(196, 214, 231, 1)"; // #cdd3d9
+const backgroundShadowColor = "rgba(84, 84, 134, 0.8)";
 
 // 239	232	90
 // #6a8742
@@ -56,6 +60,16 @@ function calculateConstants() {
   BRANCH_STEP = width / 4;
 }
 
+function setColorConstants() {
+  // grabs color
+  LEAF_COLOR_DARK = document.querySelector(LEAF_COLOR_DARK_ID).value;
+  LEAF_COLOR_LIGHT = document.querySelector(LEAF_COLOR_LIGHT_ID).value;
+  ROOT_COLOR = document.querySelector(ROOT_COLOR_ID).value;
+  for (let root of roots) {
+    root.color = ROOT_COLOR;
+  }
+}
+
 // setup() function is called once when the program starts
 function setup() {
   // place our canvas, making it fit our container
@@ -64,7 +78,8 @@ function setup() {
   canvas.parent("canvas-container");
 
   calculateConstants();
-  // resize canvas is the page is resized
+  setColorConstants();
+
   // reimagine button
   reimagineButton = $("#clicker");
   reimagineButton.click(() => {
@@ -73,6 +88,7 @@ function setup() {
     growVines(NUMROOTS, 0, random(Y_ORIGIN_MIN, Y_ORIGIN_MAX));
   });
 
+  // creates random number of vines
   growVines(NUMROOTS, 0, random(Y_ORIGIN_MIN, Y_ORIGIN_MAX));
 
   $(window).resize(function () {
@@ -85,6 +101,8 @@ function setup() {
 function draw() {
   // call a method on the instance
   background(BACKGROUND_COLOR);
+
+  setColorConstants();
 
   // my stuff
   randomSeed(seed);

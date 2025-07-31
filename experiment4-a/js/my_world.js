@@ -149,6 +149,7 @@ function calculateNeighbors2(i, j) {
 }
 
 function computeNeighborCells(i, j) {
+  if (!aliveCells.has(posToString(i, j))) return; // disregards dead cells
   let height = 0;
   // checks if neighbors neighbors has alive cells
   for (let [newi, newj] of calculateNeighbors2(i, j)) {

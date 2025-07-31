@@ -3,22 +3,33 @@ h2 {
   margin: 0;
   padding: 0;
   /* font-size: 1.2em; */
-  font-weight: lighter;
+  font-weight: 1em;
+  color: #6380ff;
+}
+
+p {
+  color: #000728;
+}
+
+body {
+  background-color: rgb(238, 247, 253);
 }
 
 #content {
   width: calc(100% - 30px);
   margin: 10px;
+  height: auto;
+  max-height: auto;
   padding: 10px;
-  border: solid 1px #808;
   font-family: sans-serif;
 }
 
 .minor-section {
   margin: 10px;
   padding: 10px;
-  border: solid 1px #a0a0a0;
+  border: solid 2px #6380ff;
   border-radius: 10px;
+  background-color: white;
 }
 
 .minor-section h2 {
@@ -30,6 +41,10 @@ h2 {
   max-width: 800px;
   width: 100%;
   height: auto;
+  padding: 0;
+  img {
+    border-radius: 10px;
+  }
 }
 
 /* Set the canvas element to be the full size of the container */
